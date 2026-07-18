@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohijit Singh</title>
+<meta name="description" content="Mohijit Singh — projects.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111318'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23e8e6df' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --surface: #ffffff;
+    --border: #e4e1d8;
+    --text: #16181d;
+    --text-dim: #55584f;
+    --text-faint: #8b8d82;
+    --accent: #1f6f5c;
+    --live: #1f8a4c;
+    --dev: #a5731f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1013;
+      --surface: #16181d;
+      --border: #262922;
+      --text: #eeece4;
+      --text-dim: #a9ab9f;
+      --text-faint: #6f7268;
+      --accent: #6fbfa8;
+      --live: #4ade80;
+      --dev: #e2ac54;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    padding: 12vh 20px 10vh;
+  }
+  main {
+    width: 100%;
+    max-width: 560px;
+  }
+  h1 {
+    font-size: 26px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .tagline {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    margin: 0 0 48px;
+    line-height: 1.5;
+  }
+  .section-label {
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 14px;
+  }
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .card {
+    display: block;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  a.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .card.disabled {
+    cursor: default;
+    opacity: 0.72;
+  }
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+  .card-name {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .status {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status.live {
+    color: var(--live);
+    background: color-mix(in srgb, var(--live) 15%, transparent);
+  }
+  .status.dev {
+    color: var(--dev);
+    background: color-mix(in srgb, var(--dev) 15%, transparent);
+  }
+  .card-desc {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .card-url {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  footer {
+    margin-top: 56px;
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+  }
+  footer a {
+    color: var(--text-faint);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  footer a:hover {
+    color: var(--text);
+    border-bottom-color: var(--text-faint);
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Mohijit Singh</h1>
+  <p class="tagline">Projects and things I'm building.</p>
+
+  <div class="section-label">Projects</div>
+  <div class="projects">
+    <a class="card" href="https://trade.mohijitsingh.com" target="_blank" rel="noopener">
+      <div class="card-top">
+        <span class="card-name">Vol-Trade</span>
+        <span class="status live">Live</span>
+      </div>
+      <div class="card-desc">A hosted multi-exchange trading simulator — real-time order matching, market makers, and scenario-driven price action.</div>
+      <div class="card-url">trade.mohijitsingh.com</div>
+    </a>
+
+    <div class="card disabled">
+      <div class="card-top">
+        <span class="card-name">Chessify</span>
+        <span class="status dev">In development</span>
+      </div>
+      <div class="card-desc">A chess engine.</div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="https://github.com/mohijit" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+</main>
+</body>
+</html>
