@@ -6,9 +6,13 @@
 <title>Mohijit Singh</title>
 <meta name="description" content="Mohijit Singh — projects.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111318'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23e8e6df' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f7f6f2;
+    --bg-tint: #eeece3;
     --surface: #ffffff;
     --border: #e4e1d8;
     --text: #16181d;
@@ -17,10 +21,13 @@
     --accent: #1f6f5c;
     --live: #1f8a4c;
     --dev: #a5731f;
+    --shadow: 0 1px 2px rgba(22,24,29,.04), 0 6px 16px -8px rgba(22,24,29,.10);
+    --shadow-hi: 0 2px 4px rgba(22,24,29,.05), 0 14px 32px -12px rgba(22,24,29,.18);
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #0f1013;
+      --bg-tint: #171a20;
       --surface: #16181d;
       --border: #262922;
       --text: #eeece4;
@@ -29,6 +36,8 @@
       --accent: #6fbfa8;
       --live: #4ade80;
       --dev: #e2ac54;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 16px -8px rgba(0,0,0,.5);
+      --shadow-hi: 0 2px 4px rgba(0,0,0,.45), 0 14px 32px -12px rgba(0,0,0,.65);
     }
   }
   * { box-sizing: border-box; }
@@ -38,118 +47,175 @@
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
   body {
     display: flex;
     justify-content: center;
     padding: 12vh 20px 10vh;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -10%, var(--bg-tint), transparent 70%);
+    background-repeat: no-repeat;
   }
-  main {
-    width: 100%;
-    max-width: 560px;
-  }
+  main { width: 100%; max-width: 600px; }
+
+  header { margin-bottom: 54px; }
   h1 {
-    font-size: 26px;
-    font-weight: 650;
-    letter-spacing: -0.01em;
-    margin: 0 0 6px;
+    font-family: Newsreader, Georgia, serif;
+    font-size: 40px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 0 0 10px;
   }
   .tagline {
-    font-size: 14.5px;
+    font-size: 15px;
     color: var(--text-dim);
-    margin: 0 0 48px;
-    line-height: 1.5;
+    margin: 0;
+    line-height: 1.55;
+    max-width: 44ch;
   }
   .section-label {
     font-size: 10.5px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-faint);
-    margin: 0 0 14px;
-  }
-  .projects {
+    margin: 0 0 16px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
   }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .projects { display: flex; flex-direction: column; gap: 12px; }
+
   .card {
+    position: relative;
     display: block;
-    padding: 16px 18px;
+    padding: 18px 20px;
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 14px;
     background: var(--surface);
+    box-shadow: var(--shadow);
     text-decoration: none;
     color: inherit;
-    transition: border-color 0.15s ease, transform 0.15s ease;
+    transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+    animation: rise .5s cubic-bezier(.2,.7,.3,1) backwards;
+  }
+  .card:nth-child(1) { animation-delay: .04s; }
+  .card:nth-child(2) { animation-delay: .09s; }
+  .card:nth-child(3) { animation-delay: .14s; }
+  .card:nth-child(4) { animation-delay: .19s; }
+  .card:nth-child(5) { animation-delay: .24s; }
+  .card:nth-child(6) { animation-delay: .29s; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
   }
   a.card:hover {
-    border-color: var(--accent);
-    transform: translateY(-1px);
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hi);
   }
-  .card.disabled {
-    cursor: default;
-    opacity: 0.72;
+  a.card::after {
+    content: "\2192";
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+    font-size: 14px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity .2s ease, transform .2s ease;
   }
+  a.card:hover::after { opacity: 1; transform: none; }
+  .card.disabled { cursor: default; opacity: .72; box-shadow: none; }
+
   .card-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 4px;
+    margin-bottom: 5px;
   }
   .card-name {
-    font-size: 15px;
+    font-family: Newsreader, Georgia, serif;
+    font-size: 19px;
     font-weight: 600;
+    letter-spacing: -0.005em;
   }
   .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     font-size: 9px;
-    letter-spacing: 0.08em;
+    letter-spacing: .09em;
     text-transform: uppercase;
-    padding: 2px 7px;
+    padding: 3px 9px 3px 8px;
     border-radius: 20px;
     white-space: nowrap;
     flex-shrink: 0;
   }
-  .status.live {
-    color: var(--live);
-    background: color-mix(in srgb, var(--live) 15%, transparent);
+  .status::before {
+    content: "";
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: currentColor;
   }
-  .status.dev {
-    color: var(--dev);
-    background: color-mix(in srgb, var(--dev) 15%, transparent);
+  .status.live { color: var(--live); background: color-mix(in srgb, var(--live) 14%, transparent); }
+  .status.live::before { animation: pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--live) 55%, transparent); }
+    60%      { box-shadow: 0 0 0 5px color-mix(in srgb, var(--live) 0%, transparent); }
   }
-  .card-desc {
-    font-size: 12.5px;
-    color: var(--text-dim);
-    line-height: 1.5;
-  }
+  .status.dev { color: var(--dev); background: color-mix(in srgb, var(--dev) 14%, transparent); }
+
+  .card-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; max-width: 52ch; }
   .card-url {
     font-size: 11px;
     color: var(--text-faint);
-    margin-top: 8px;
+    margin-top: 10px;
     font-variant-numeric: tabular-nums;
   }
+
   footer {
-    margin-top: 56px;
+    margin-top: 60px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
     display: flex;
-    gap: 16px;
-    font-size: 12px;
+    gap: 18px;
+    font-size: 12.5px;
   }
   footer a {
     color: var(--text-faint);
     text-decoration: none;
     border-bottom: 1px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
   }
-  footer a:hover {
-    color: var(--text);
-    border-bottom-color: var(--text-faint);
+  footer a:hover { color: var(--text); border-bottom-color: var(--text-faint); }
+
+  @media (max-width: 480px) {
+    body { padding: 8vh 16px 8vh; }
+    h1 { font-size: 32px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+    .status.live::before { animation: none; }
+    a.card:hover { transform: none; }
+    * { transition-duration: .01ms !important; }
   }
 </style>
 </head>
 <body>
 <main>
-  <h1>Mohijit Singh</h1>
-  <p class="tagline">Projects and things I'm building.</p>
+  <header>
+    <h1>Mohijit Singh</h1>
+    <p class="tagline">Projects and things I'm building.</p>
+  </header>
 
   <div class="section-label">Projects</div>
   <div class="projects">
